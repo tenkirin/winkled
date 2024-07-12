@@ -8,13 +8,18 @@ The **WIN**dows **K**eyboard **L**ayout **ED**itor
 
 ## Usage
 
-1. Clone this repo and change directory to it.
+Clone this repo and change directory to it.
 
-    ```
-    git clone https://github.com/tenkirin/winkled.git; cd winkled
-    ```
+```
+git clone https://github.com/tenkirin/winkled.git; cd winkled
+```
 
-1. Create a config file named `remappings.winkled.json` with key remapping rules under the root directory of the project.
+### Remapping
+
+> [!NOTE]
+> Refer to the [MDN docs](https://developer.mozilla.org/en-US/docs/Web/API/UI_Events/Keyboard_event_code_values#code_values_on_windows) or [this file](./src/consts/scancode.js) for the complete list of key names.
+
+1. Create a configuration file named `remappings.winkled.json` with key remapping rules under the root directory of the project.
 
     Example: Swap `CapsLock` key with `ControlLeft` key
 
@@ -39,10 +44,17 @@ The **WIN**dows **K**eyboard **L**ayout **ED**itor
        npm run reg
        ```
 
-1. Execute generated file in `./dist` directory and reboot the computer.
+1. Execute the generated file `remap.winkled.*`  in `./dist` directory and reboot the computer.
 
-> [!NOTE]
-> To remove all remappings and recover to the system default, delete the config file `remappings.winkled.json`, then re-run npm scripts.
+### Recover
+
+To remove all remappings and recover to the system default:
+
+1. Delete the configuration file `remappings.winkled.json`.
+
+1. Run npm scripts as mentioned above.
+
+1. Execute the generated file `recover.winkled.*` in `./dist` directory and reboot the computer.
 
 ## License
 
