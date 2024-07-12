@@ -1,0 +1,25 @@
+{
+  "name": "winkled",
+  "version": "0.1.0",
+  "private": true,
+  "description": "winkled: WINdows Keyboard Layout EDitor",
+  "type": "module",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "npm run bat",
+    "bat": "NODE_OPTIONS=--disable-warning=ExperimentalWarning node src/index.js bat",
+    "reg": "NODE_OPTIONS=--disable-warning=ExperimentalWarning node src/index.js reg"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "author": "tenkirin",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tenkirin/winkled.git"
+  },
+  "bugs": {
+    "url": "https://github.com/tenkirin/winkled/issues"
+  }
+}
