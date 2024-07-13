@@ -7,8 +7,8 @@
   "main": "src/index.js",
   "scripts": {
     "start": "npm run bat",
-    "bat": "NODE_OPTIONS=--disable-warning=ExperimentalWarning node src/index.js bat",
-    "reg": "NODE_OPTIONS=--disable-warning=ExperimentalWarning node src/index.js reg"
+    "bat": "node --disable-warning=ExperimentalWarning src/index.js bat",
+    "reg": "node --disable-warning=ExperimentalWarning src/index.js reg"
   },
   "engines": {
     "node": ">=20.0.0"

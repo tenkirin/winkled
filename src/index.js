@@ -7,7 +7,7 @@
 
 import { argv, exit } from 'node:process';
 import { mkdir, writeFile } from 'node:fs/promises';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, URL } from 'node:url';
 import { dirname, resolve } from 'node:path';
 
 import { toDWORD } from './utils/binary.js';
@@ -21,7 +21,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);  // https://nodejs.org/api/path.html#pathdirnamepath
 const dstDir = resolve(__dirname, '../dist'); // https://nodejs.org/api/path.html#pathresolvepaths
 const [, , format = FORMAT.batch, configFile = 'remappings.winkled.json'] = argv; // https://nodejs.org/api/process.html#processargv
-const configFilePath = resolve(__dirname, `../${configFile}`);
+const { href: configFileURL } = new URL(`../${configFile}`, import.meta.url); // https://nodejs.org/docs/latest/api/url.html#new-urlinput-base
 
 const createRecoverFile = async () => {
   const f = resolve(dstDir, `recover.winkled.${format}`);
@@ -117,7 +117,12 @@ const toScancodeMap = remappings => {
   try {
     // https://nodejs.org/api/esm.html#import-expressions
     // https://nodejs.org/api/esm.html#import-attributes
-    const { default: remappings } = await import(configFilePath, { with: { type: 'json' } });
+    // For import expression, aka dynamic import(), the module name should be a *valid URL*.
+    // It is unsafe to use absolute paths rather than real URLs,
+    // as on Windows, absolute paths start with a volume specifier like 'c:', which will lead to an error:
+    // > Error [ERR_UNSUPPORTED_ESM_URL_SCHEME]: Only URLs with a scheme in: file, data, and node are supported by the default ESM loader.
+    // > On Windows, absolute paths must be valid file:// URLs. Received protocol 'c:'
+    const { default: remappings } = await import(configFileURL, { with: { type: 'json' } });
     await createRemapFile(remappings);
   } catch (err) {
     if (err.code !== 'ERR_MODULE_NOT_FOUND') {  // https://nodejs.org/api/errors.html#errorcode
