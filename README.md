@@ -19,7 +19,7 @@ git clone https://github.com/tenkirin/winkled.git; cd winkled
 > [!NOTE]
 > Refer to the [MDN docs](https://developer.mozilla.org/en-US/docs/Web/API/UI_Events/Keyboard_event_code_values#code_values_on_windows) or [this file](./src/consts/scancode.js) for the complete list of key names.
 
-1. Create a configuration file named `remappings.winkled.json` with key remapping rules under the root directory of the project.
+1. Create a configuration file named `remappings.winkled.json` containing key remapping rules in the format `"FROM_KEY": "TO_KEY"` under the root directory of the project.
 
     Example: Swap `CapsLock` key with `ControlLeft` key
 
